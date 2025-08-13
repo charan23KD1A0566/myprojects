@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rock Paper Scissors</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #121212; color: white; }
+    h1 { color: #00d8ff; }
+    .choices { display: flex; justify-content: center; gap: 1rem; margin-top: 20px; }
+    .choice { padding: 10px 20px; background: #00d8ff; border-radius: 5px; cursor: pointer; color: black; }
+    .choice:hover { background: #00b7d4; }
+    #result { margin-top: 20px; font-size: 1.2rem; }
+</style>
+</head>
+<body>
+<h1>Rock Paper Scissors</h1>
+<p>Choose your move:</p>
+<div class="choices">
+    <div class="choice" data-choice="rock">✊ Rock</div>
+    <div class="choice" data-choice="paper">✋ Paper</div>
+    <div class="choice" data-choice="scissors">✌️ Scissors</div>
+</div>
+<div id="result">Make your choice!</div>
+
+<script>
+const choices = document.querySelectorAll('.choice');
+const result = document.getElementById('result');
+const gameChoices = ['rock', 'paper', 'scissors'];
+
+choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        const playerChoice = choice.dataset.choice;
+        const computerChoice = gameChoices[Math.floor(Math.random() * 3)];
+        let message = '';
+        if (playerChoice === computerChoice) message = "It's a tie!";
+        else if (
+            (playerChoice === 'rock' && computerChoice === 'scissors') ||
+            (playerChoice === 'paper' && computerChoice === 'rock') ||
+            (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) message = "You win!";
+        else message = "Computer wins!";
+        result.textContent = `You chose ${playerChoice}, computer chose ${computerChoice}. ${message}`;
+    });
+});
+</script>
+</body>
+</html>
